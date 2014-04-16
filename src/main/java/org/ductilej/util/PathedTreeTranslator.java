@@ -296,19 +296,20 @@ public class PathedTreeTranslator extends TreeTranslator
     }
 
     @Override public void visitNewArray (JCNewArray tree) {
-        push("NewArray");
-        tree.annotations = translate(tree.annotations);
-        List<List<JCTypeAnnotation>> dimAnnos = List.nil();
-        for (List<JCTypeAnnotation> origDimAnnos : tree.dimAnnotations)
-            dimAnnos = dimAnnos.append(translate(origDimAnnos));
-        tree.dimAnnotations = dimAnnos;
-        push("type");
-        tree.elemtype = translate(tree.elemtype);
-        pop();
-        tree.dims = translate(tree.dims);
-        tree.elems = translate(tree.elems);
-        result = tree;
-        pop();
+        throw new RuntimeException("No idea how to do this!");
+//        push("NewArray");
+//        tree.annotations = translate(tree.annotations);
+//        List<List<JCTypeAnnotation>> dimAnnos = List.nil();
+//        for (List<JCTypeAnnotation> origDimAnnos : tree.dimAnnotations)
+//            dimAnnos = dimAnnos.append(translate(origDimAnnos));
+//        tree.dimAnnotations = dimAnnos;
+//        push("type");
+//        tree.elemtype = translate(tree.elemtype);
+//        pop();
+//        tree.dims = translate(tree.dims);
+//        tree.elems = translate(tree.elems);
+//        result = tree;
+//        pop();
     }
 
     @Override public void visitParens (JCParens tree) {
@@ -425,7 +426,7 @@ public class PathedTreeTranslator extends TreeTranslator
 
     @Override public void visitTypeParameter (JCTypeParameter tree) {
         push("TypeParameter");
-        tree.annotations = translate(tree.annotations);
+        // tree.annotations = translate(tree.annotations);
         tree.bounds = translate(tree.bounds);
         result = tree;
         pop();
@@ -476,13 +477,13 @@ public class PathedTreeTranslator extends TreeTranslator
         pop();
     }
 
-    @Override public void visitAnnotatedType (JCAnnotatedType tree) {
-        push("AnnotatedType");
-        tree.annotations = translate(tree.annotations);
-        tree.underlyingType = translate(tree.underlyingType);
-        result = tree;
-        pop();
-    }
+//    @Override public void visitAnnotatedType (JCAnnotatedType tree) {
+//        push("AnnotatedType");
+//        tree.annotations = translate(tree.annotations);
+//        tree.underlyingType = translate(tree.underlyingType);
+//        result = tree;
+//        pop();
+//    }
 
     protected void push (String elem) {
         _path = _path.prepend(elem);
